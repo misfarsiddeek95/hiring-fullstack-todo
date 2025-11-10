@@ -78,13 +78,9 @@ const AdminDashboard = () => {
     onClose: onCloseTask,
   } = useDisclosure(); // for task modal
 
-  const [submitted, setSubmitted] = React.useState<EmployeeFormData | null>(
-    null
-  );
+  const [setSubmitted] = React.useState<EmployeeFormData | null>(null);
 
-  const [taskSubmitted, setTaskSubmitted] = React.useState<TaskFormData | null>(
-    null
-  );
+  const [setTaskSubmitted] = React.useState<TaskFormData | null>(null);
 
   const [errors, setErrors] = React.useState<Record<string, string>>({});
 
