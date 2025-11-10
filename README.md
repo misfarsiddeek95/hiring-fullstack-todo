@@ -28,6 +28,18 @@ This repository contains the fullstack code for a Todo application. The project 
 
 To run this project, you must run both the `client` and `server` applications simultaneously in two separate terminals.
 
+> **Note:** For demo purposes, `.env` files have been included in the relevant directories. In production, these should never be committed to version control.
+
+### Database Configuration
+
+The application uses PostgreSQL with the following credentials:
+
+- **Username:** `myuser`
+- **Password:** `mypassword`
+- **Port:** `5432`
+
+These credentials are already configured in the `.env` file located in the `/server` directory.
+
 ### Terminal 1: Run the Server (Backend)
 
 ```bash
@@ -37,8 +49,10 @@ cd server
 # Install server dependencies
 yarn install
 
+# Generate Prisma Client
+npx prisma generate
+
 # Run Prisma migrations to set up your database
-# (You may need to configure your .env file first)
 npx prisma migrate dev
 
 # Start the NestJS server in watch mode
