@@ -30,12 +30,14 @@ export class TodoService {
   }
 
   async markTodoAsDone(id: number) {
+    const todo = await this.prisma.todos.findUnique({ where: { id } });
+
     return await this.prisma.todos.update({
       where: {
         id,
       },
       data: {
-        completed: true,
+        completed: !todo.completed,
       },
     });
   }
