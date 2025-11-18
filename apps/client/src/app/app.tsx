@@ -15,11 +15,14 @@ import { Todo } from '../types/type';
 import apiClient from './lib/api';
 import { Delete, Edit, Add } from '@mui/icons-material';
 import TodoModal from '../components/TodoModal';
+import { useToast } from '../context/ToastContext';
 
 export function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [editTodo, setEditTodo] = useState<Todo | null>(null);
+
+  const { showToast } = useToast();
 
   const openCreateModal = () => {
     setEditTodo(null);
@@ -38,6 +41,7 @@ export function App() {
       setTodos(resp.data);
     } catch (error) {
       console.error('Failed to fetch');
+      showToast('Failed to fetch tasks', 'error');
     }
   };
 
@@ -51,14 +55,17 @@ export function App() {
       if (editTodo) {
         // Update existing todo
         await apiClient.put(`/todos/${editTodo.id}`, data);
+        showToast('Task updated successfully!', 'success');
       } else {
         // Create new todo
         await apiClient.post('/todos', data);
+        showToast('New task created!', 'success');
       }
       getTodos();
       setEditTodo(null);
     } catch (error) {
       console.error('Failed to save');
+      showToast('Failed to save task. Please try again.', 'error');
     }
   };
 
@@ -67,8 +74,10 @@ export function App() {
     try {
       await apiClient.delete(`/todos/${id}`);
       getTodos();
+      showToast('Task deleted', 'info');
     } catch (error) {
       console.error('Failed to delete');
+      showToast('Could not delete task', 'error');
     }
   };
 
@@ -79,6 +88,7 @@ export function App() {
       getTodos();
     } catch (error) {
       console.error('Failed to complete');
+      showToast('Connection failed. Change reverted.', 'warning');
     }
   };
 
