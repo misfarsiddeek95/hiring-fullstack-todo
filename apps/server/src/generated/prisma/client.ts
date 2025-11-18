@@ -30,7 +30,7 @@ export * from "./enums.js"
  * ```
  * const prisma = new PrismaClient()
  * // Fetch zero or more Todos
- * const todos = await prisma.todo.findMany()
+ * const todos = await prisma.todos.findMany()
  * ```
  * 
  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
@@ -45,7 +45,7 @@ path.join(__dirname, "libquery_engine-darwin.dylib.node")
 path.join(process.cwd(), "apps/server/src/generated/prisma/libquery_engine-darwin.dylib.node")
 
 /**
- * Model Todo
+ * Model Todos
  * 
  */
-export type Todo = Prisma.TodoModel
+export type Todos = Prisma.TodosModel

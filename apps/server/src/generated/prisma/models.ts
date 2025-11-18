@@ -8,5 +8,5 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/Todo.js'
+export type * from './models/Todos.js'
 export type * from './commonInputTypes.js'
