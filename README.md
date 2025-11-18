@@ -1,96 +1,84 @@
-# HiringFullstackTodo
+# 🚀 Fullstack Todo Monolith
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+A production-ready monolithic application built with Nx, featuring a NestJS backend and a React frontend. This project demonstrates a type-safe, scalable architecture using modern web technologies.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+## 🛠 Tech Stack
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+### Monorepo Tooling
 
-## Run tasks
+- **Nx** (Workspace management & CLI)
 
-To run tasks with Nx use:
+### Backend (Server)
 
-```sh
-npx nx <target> <project-name>
+- **Framework**: NestJS
+- **Database**: MySQL
+- **ORM**: Prisma
+- **Validation**: class-validator & class-transformer
+- **Architecture**: Controller-Service-Repository pattern
+
+### Frontend (Client)
+
+- **Framework**: React (Vite)
+- **UI Library**: Material UI (MUI)
+- **State/Network**: Axios with Interceptors & Optimistic UI updates
+- **Feedback**: Global Toast Context
+
+## ⚡️ Getting Started
+
+Follow these steps to set up the project locally.
+
+### 1. Prerequisites
+
+Ensure you have the following installed:
+
+- Node.js (LTS version recommended)
+- MySQL (Running locally or via Docker)
+
+### 2. Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone <repository-url>
+cd <project-name>
+npm install
 ```
 
-For example:
+### Environment Configuration
 
-```sh
-npx nx build myproject
+Create a `.env` file in the root directory (or inside `apps/server/` depending on your specific Prisma setup).
+
+```bash
+# MySQL Connection String
+# Format: mysql://USER:PASSWORD@HOST:PORT/DATABASE
+DATABASE_URL="mysql://root:password@localhost:3306/todo_db"
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+### Database Initialization
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Run the Prisma migrations to create the database tables:
 
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-To install a new plugin you can use the `nx add` command. Here's an example of adding the React plugin:
-```sh
-npx nx add @nx/react
+```bash
+# Applies the migration to your MySQL database
+npx prisma migrate dev --name init
 ```
 
-Use the plugin's generator to create new projects. For example, to create a new React app or library:
+### Running the Application
 
-```sh
-# Generate an app
-npx nx g @nx/react:app demo
+You can run the client and server individually in separate terminals.
 
-# Generate a library
-npx nx g @nx/react:lib some-lib
+#### Start the Backend (API)
+
+```bash
+npx nx serve server
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+URL: http://localhost:3000/api
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+#### Start the Frontend (UI)
 
-## Set up CI!
-
-### Step 1
-
-To connect to Nx Cloud, run the following command:
-
-```sh
-npx nx connect
+```bash
+npx nx serve client
 ```
 
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
-
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Step 2
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
-```
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+URL: http://localhost:4200
